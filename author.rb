@@ -29,15 +29,10 @@ class Author
     counts = Author.all.map {|author| author.total_words}
     max_word = counts.max
     if counts.count(max_word) == 1
-      Author.author_words_max
+      Author.all.max {|author1, author2| author1.total_words <=> author2.total_words}
     else
       Author.all.select {|author| author.total_words == max_word}
     end
-  end
-
-  private
-  def self.author_words_max 
-    Author.all.max {|author1, author2| author1.total_words <=> author2.total_words}
   end
 
 end
